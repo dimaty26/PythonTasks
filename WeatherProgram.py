@@ -1,6 +1,8 @@
 from pyowm import OWM
 from pyowm.commons.enums import SubscriptionTypeEnum
 
+from TokenKeeper import PYOWMToken
+
 RU_CONFIG = {
     'subscription_type': SubscriptionTypeEnum.FREE,
     'language': 'ru',
@@ -16,7 +18,7 @@ RU_CONFIG = {
     }
 }
 
-owm = OWM('#TODO: insert your own API key', RU_CONFIG)
+owm = OWM(PYOWMToken, RU_CONFIG)
 mgr = owm.weather_manager()
 
 place = input("В каком городе посмотреть погоду? ")
