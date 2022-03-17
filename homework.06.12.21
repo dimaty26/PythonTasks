@@ -1,0 +1,9 @@
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        a = 0 
+        while a in nums:
+            a += 1
+            if not a in nums:
+                return a
+                break
+                
