@@ -27,14 +27,17 @@ mgr = owm.weather_manager()
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-    bot.send_message(message.chat.id, "Howdy, how are you doing?")
+    bot.send_message(message.chat.id, "Введите название города, погоду в котором вы хотите узнать:")
 
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     observation = mgr.weather_at_place(message.text)
     w = observation.weather
-    bot.send_message(message.chat.id, "Сейчас в городе " + message.text + " " + w.detailed_status)
+    bot.send_message(message.chat.id, "Сейчас в городе " + message.text + " " + w.detailed_status + " \n" +
+    "Температура: " + str(w.temperature('celsius')['temp']) + " \n" + "Ветер: " + str(w.wind()) + " \n" +
+    "Влажность: " + str(w.humidity) + " \n" + "Тепловой индекс: " + str(w.heat_index) + " \n" +
+    "Облачность: " + str(w.clouds))
 
 
 bot.infinity_polling()
